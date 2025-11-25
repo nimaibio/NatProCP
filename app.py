@@ -106,7 +106,19 @@ html.Div([
                   html.Div([
                       html.H1("Statistics", style={'font-size': '30','margin-top': '10px',
                                                    'text-align': 'center'}, ),
+                      dcc.Textarea(
+                          id='textarea_total_gen',
+                          value='Total Crops/Plants in Database 262',
+                          style={'width': '100%', 'height': 50, 'text-align': 'left','font-family':'Times New Roman'},
+                          className="text_area"
+                      ),
 
+                      dcc.Textarea(
+                              id='textarea_total_compounds',
+                              value='Total Compounds in Database 5281',
+                              style={'width': '100%', 'height': 50, 'text-align': 'left','font-family':'Times New Roman'},
+                              className="text_area"
+                      ),
 
                       dcc.Textarea(
                           id='textarea_sel_compounds',
@@ -440,3 +452,4 @@ if __name__ == '__main__':
     # data = fetch_data('abutilon_indicum','')
     # app.run(host="200.200.202.79",port="8050")
     app.run_server()
+
