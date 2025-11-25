@@ -38,7 +38,7 @@ def process_data(df, first_call=False):
 
 # rename genotype options
 values = os.listdir('csv_data')
-values.sort()
+print(values)
 
 labels = []
 for item in values:
@@ -52,7 +52,7 @@ df_transposed = process_data(df, first_call=True)
 
 app = Dash()
 server = app.server
-app.title = "NatProCP"
+app.title = "NaturePro"
 app._favicon = ("about_database_img_2.jpeg")
 
 # application layout starts from here
@@ -81,7 +81,7 @@ html.Div([
 
 
     html.Div(className="about-section", children=[
-    html.H1("NatProCP"),
+    html.H1("NaturePro"),
     html.H2("Plant-Derived Natural Products Database for Crop Protection")
 
 ],
@@ -104,13 +104,26 @@ html.Div([
                   ]),
                   # Statistics Div
                   html.Div([
-                      html.H1("Statistics", style={'font-size': '30','margin-top': '10px',
+                      html.H1("Statistics", style={'font-size': '30', 'margin-top': '10px',
                                                    'text-align': 'center'}, ),
 
+                      dcc.Textarea(
+                          id='textarea_total_gen',
+                          value='Total Crops/Plants in Database 262',
+                          style={'width': '100%', 'height': 50, 'text-align': 'left','font-family':'Times New Roman'},
+                          className="text_area"
+                      ),
+
+                      dcc.Textarea(
+                              id='textarea_total_compounds',
+                              value='Total Compounds in Database 5281',
+                              style={'width': '100%', 'height': 50, 'text-align': 'left','font-family':'Times New Roman'},
+                              className="text_area"
+                      ),
 
                       dcc.Textarea(
                           id='textarea_sel_compounds',
-                          value='Total compounds in selected crop/plant 20',
+                          value='Total Compounds in selected crop/plant 20',
 
                           style={'width': '100%', 'height': 50, 'text-align': 'left','font-family':'Times New Roman'},
                           className="text_area"
@@ -185,7 +198,7 @@ html.Div([
                   html.Hr(style={"width": "100%", "border-color": "red"}),
                   html.Div([
                       html.Img(id='image', src=app.get_asset_url(path='Images/126.png'),
-                               style={'height': '30%', 'width': '30%', 'object-fit': 'cover',
+                               style={'height': '50%', 'width': '50%', 'object-fit': 'cover',
                                       }
                                ), ], style={'display': 'flex', 'justify-content': 'center'
                                             }),
@@ -291,7 +304,7 @@ html.Div([
                      "ICAR Data Use Licence"
                  ]),
                 html.H3(children=[
-                     "ICAR - Indian Agricultural Statistics Research Institute"
+                     "Copyright © ICAR - Indian Agricultural Statistics Research Institute"
                  ]),
                     html.H3(children=[
                      "Library Avenue, PUSA, New Delhi - 110 012 (INDIA)"
@@ -299,7 +312,9 @@ html.Div([
                     html.H3(children=[
                     "Phone: 91-11-25847121-24, 25841254 (PBX), Fax: 91-11-25841564"
                  ]),
-        
+                    html.H3(children=[
+                    "All rights reserved"
+                 ]),
                     html.A(href="https://iasri.icar.gov.in/",children=[html.Img(src=app.get_asset_url(path='iasri.png'),
                                style={'height': '100px', 'width': '100px', 'border-radious':'50%'
                                       })]),
@@ -329,7 +344,7 @@ def update_compund_dropdwon(value):
 
     data=fetch_data(value,'')
     total_mols = data.shape[0]
-    text_area_text = 'Total compounds in selected Crop/Plant: ' + str(total_mols)
+    text_area_text = 'Total Compounds in selected Crop/Plant: ' + str(total_mols)
 
     options=data['Compound Name']
     value=options[0]
@@ -439,4 +454,4 @@ def func(n_clicks):
 if __name__ == '__main__':
     # data = fetch_data('abutilon_indicum','')
     # app.run(host="200.200.202.79",port="8050")
-    app.run_server()
+    app.run()
